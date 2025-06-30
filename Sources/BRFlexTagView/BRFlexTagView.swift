@@ -1,79 +1,11 @@
 //
-//  BRTagView.swift
+//  BRFlexTagView.swift
 //  TagListView
 //
 //  Created by Assistant
 //
 
 import UIKit
-
-// MARK: - Protocols
-
-/// 灵活标签项数据协议
-public protocol BRFlexTagItemDataProtocol {
-    /// 唯一标识符
-    var identifier: String { get }
-    /// 用于创建视图的数据
-    var viewData: Any { get }
-}
-
-/// 灵活标签项视图协议
-public protocol BRFlexTagItemViewProtocol: UIView {
-    /// 关联的数据类型
-    associatedtype DataType: BRFlexTagItemDataProtocol
-    
-    /// 代理
-    var delegate: BRFlexTagItemViewDelegate? { get set }
-    /// 索引
-    var index: Int { get set }
-    
-    /// 初始化方法
-    init(data: DataType)
-    
-    /// 更新视图数据
-    func updateData(_ data: DataType)
-    
-    /// 计算视图尺寸
-    func sizeThatFits(_ size: CGSize) -> CGSize
-}
-
-/// 类型擦除的灵活标签项包装器
-public struct AnyFlexTagItem {
-    let data: any BRFlexTagItemDataProtocol
-    let viewCreator: (any BRFlexTagItemDataProtocol, Int) -> any UIView & BRFlexTagItemViewProtocol
-    
-    /// 为特定类型创建AnyFlexTagItem
-    public static func create<T: BRFlexTagItemViewProtocol>(data: T.DataType, viewType: T.Type) -> AnyFlexTagItem {
-        return AnyFlexTagItem(
-            data: data,
-            viewCreator: { data, index in
-                let view = T(data: data as! T.DataType)
-                view.index = index
-                return view
-            }
-        )
-    }
-    
-    /// 创建视图
-    func createView(at index: Int, delegate: BRFlexTagItemViewDelegate?) -> any UIView & BRFlexTagItemViewProtocol {
-        let view = viewCreator(data, index)
-        view.delegate = delegate
-        return view
-    }
-}
-
-/// 文本标签数据模型
-public struct BRFlexTextTagData: BRFlexTagItemDataProtocol {
-    public let identifier: String
-    public let text: String
-    public let viewData: Any
-    
-    public init(text: String, identifier: String? = nil) {
-        self.text = text
-        self.identifier = identifier ?? text
-        self.viewData = text
-    }
-}
 
 // MARK: - BRFlexTagView
 
@@ -163,6 +95,8 @@ public class BRFlexTagView: UIView {
         super.init(coder: coder)
         setupView()
     }
+    
+    // MARK: - Public API Methods
     
     /// 设置统一类型的标签数据（向后兼容）
     public func setTagData<T: BRFlexTagItemViewProtocol>(_ data: [T.DataType], viewType: T.Type) {
@@ -264,6 +198,8 @@ public class BRFlexTagView: UIView {
         self.tagHorizontalSpacing = tagHorizontalSpacing
         self.tagVerticalSpacing = tagVerticalSpacing
     }
+    
+    // MARK: - Private Methods
     
     private func setupView() {
         backgroundColor = .clear
@@ -534,114 +470,3 @@ extension BRFlexTagView: BRFlexTagItemViewDelegate {
         onTagTapped?(index)
     }
 }
-
-// MARK: - BRFlexTagItemViewDelegate Protocol
-
-public protocol BRFlexTagItemViewDelegate: AnyObject {
-    func tagItemTapped(at index: Int)
-}
-
-// MARK: - BRFlexTagItemView
-
-public class BRFlexTagItemView: UIView, BRFlexTagItemViewProtocol {
-    public typealias DataType = BRFlexTextTagData
-    
-    private let label = UILabel()
-    public weak var delegate: BRFlexTagItemViewDelegate?
-    public var index: Int = 0
-    
-    public var text: String {
-        get { return label.text ?? "" }
-        set { label.text = newValue }
-    }
-    
-    public var padding: CGFloat = 10.0 {
-        didSet { setNeedsLayout() }
-    }
-    
-    public var cornerRadius: CGFloat = 4.0 {
-        didSet { layer.cornerRadius = cornerRadius }
-    }
-    
-    public var textFont: UIFont = .systemFont(ofSize: 14) {
-        didSet { label.font = textFont }
-    }
-    
-    public var textColor: UIColor = .white {
-        didSet { label.textColor = textColor }
-    }
-    
-    // MARK: - BRFlexTagItemViewProtocol Implementation
-    
-    public required init(data: BRFlexTextTagData) {
-        super.init(frame: .zero)
-        setupView()
-        updateData(data)
-    }
-    
-    public func updateData(_ data: BRFlexTextTagData) {
-        self.text = data.text
-    }
-    
-    // MARK: - Legacy Support
-    
-    public init(text: String) {
-        super.init(frame: .zero)
-        setupView()
-        self.text = text
-    }
-    
-    public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    private func setupView() {
-        isUserInteractionEnabled = true
-        layer.cornerRadius = cornerRadius
-        
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = textFont
-        label.textColor = textColor
-        
-        addSubview(label)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        addGestureRecognizer(tapGesture)
-    }
-    
-    @objc private func handleTap() {
-        delegate?.tagItemTapped(at: index)
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        label.frame = bounds.insetBy(dx: padding, dy: padding)
-    }
-    
-    public override func sizeThatFits(_ size: CGSize) -> CGSize {
-        // 首先计算文本的理想尺寸（不限制宽度）
-        let idealLabelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-        let idealWidth = ceil(idealLabelSize.width) + (padding * 2)
-        
-        // 如果理想宽度小于等于可用宽度，使用理想宽度
-        if idealWidth <= size.width {
-            return CGSize(
-                width: idealWidth,
-                height: idealLabelSize.height + (padding * 2)
-            )
-        } else {
-            // 如果理想宽度超过可用宽度，使用可用宽度并计算换行后的高度
-            let maxLabelWidth = size.width - (padding * 2)
-            let constrainedLabelSize = label.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat.greatestFiniteMagnitude))
-            
-            return CGSize(
-                width: size.width,
-                height: ceil(constrainedLabelSize.height) + (padding * 2)
-            )
-        }
-    }
-}
-

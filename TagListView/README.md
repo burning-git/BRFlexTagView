@@ -22,7 +22,7 @@ tagView.onTagTapped = { index in
 }
 ```
 
-## 2. TagCollectionView (基于 UICollectionView)
+## 2. TagCollectionView (基于 UICollectionView) 未实现
 
 基于 UICollectionView 的高性能实现，适合大量标签的场景。
 
