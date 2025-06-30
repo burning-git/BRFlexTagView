@@ -21,14 +21,22 @@
 
 ### 行对齐方式演示
 
-**左对齐 (Left Alignment)**
-![左对齐效果](introImgs/lineAlignment_left.jpg)
-
-**居中对齐 (Center Alignment)**
-![居中对齐效果](introImgs/lineAlignment_center.jpg)
-
-**右对齐 (Right Alignment)**
-![右对齐效果](introImgs/lineAlignment_right.jpg)
+<table>
+  <tr>
+    <td align="center">
+      <strong>左对齐 (Left Alignment)</strong><br/>
+      <img src="introImgs/lineAlignment_left.jpg" alt="左对齐效果" width="200"/>
+    </td>
+    <td align="center">
+      <strong>居中对齐 (Center Alignment)</strong><br/>
+      <img src="introImgs/lineAlignment_center.jpg" alt="居中对齐效果" width="200"/>
+    </td>
+    <td align="center">
+      <strong>右对齐 (Right Alignment)</strong><br/>
+      <img src="introImgs/lineAlignment_right.jpg" alt="右对齐效果" width="200"/>
+    </td>
+  </tr>
+</table>
 
 ### 设置对齐方式
 
