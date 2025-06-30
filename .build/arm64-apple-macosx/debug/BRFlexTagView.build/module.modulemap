@@ -1,0 +1,4 @@
+module BRFlexTagView {
+    header "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagView-Swift.h"
+    requires objc
+}

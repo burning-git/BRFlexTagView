@@ -1,0 +1,112 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "BRFlexTagView-arm64-apple-macosx15.0-debug.module": ["<BRFlexTagView-arm64-apple-macosx15.0-debug.module>"]
+  "BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.module": ["<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.module>"]
+  "BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test": ["<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test>"]
+  "BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module": ["<BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<BRFlexTagView-arm64-apple-macosx15.0-debug.module>"]
+  "test": ["<BRFlexTagView-arm64-apple-macosx15.0-debug.module>","<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test>","<BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Tests/BRFlexTagViewTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources"]
+    description: "Write auxiliary file /Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources"
+
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.derived/runner.swift"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/sources"]
+    description: "Write auxiliary file /Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/sources"
+
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.derived/runner.swift"]
+
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/runner.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swift.o"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.product/Objects.LinkFileList"
+
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Tests/BRFlexTagViewTests/BRTagViewTests.swift"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/sources"]
+    description: "Write auxiliary file /Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/sources"
+
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<BRFlexTagView-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule"]
+    outputs: ["<BRFlexTagView-arm64-apple-macosx15.0-debug.module>"]
+
+  "<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/runner.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewPackageTests.swiftmodule"]
+    outputs: ["<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.module>"]
+
+  "<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test>":
+    tool: phony
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.xctest/Contents/MacOS/BRFlexTagViewPackageTests"]
+    outputs: ["<BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test>"]
+
+  "<BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewTests.swiftmodule"]
+    outputs: ["<BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module>"]
+
+  "C.BRFlexTagView-arm64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule"]
+    description: "Compiling Swift Module 'BRFlexTagView' (2 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","BRFlexTagView","-emit-dependencies","-emit-module","-emit-module-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule","-output-file-map","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources","-I","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx10.13","-enable-batch-mode","-index-store-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagView-Swift.h","-color-diagnostics","-swift-version","5","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","taglistview"]
+
+  "C.BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.derived/runner.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewTests.swiftmodule","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/sources"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/runner.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'BRFlexTagViewPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","BRFlexTagViewPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewPackageTests.swiftmodule","-output-file-map","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/sources","-I","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx10.13","-enable-batch-mode","-index-store-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/BRFlexTagViewPackageTests-Swift.h","-color-diagnostics","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","taglistview"]
+
+  "C.BRFlexTagViewPackageTests-arm64-apple-macosx15.0-debug.test":
+    tool: shell
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.build/runner.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.xctest/Contents/MacOS/BRFlexTagViewPackageTests"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.xctest/Contents/MacOS/BRFlexTagViewPackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug","-o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.xctest/Contents/MacOS/BRFlexTagViewPackageTests","-module-name","BRFlexTagViewPackageTests","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewPackageTests.product/Objects.LinkFileList","-target","arm64-apple-macosx13.0","-Xlinker","-add_ast_path","-Xlinker","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewPackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewTests.swiftmodule","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.BRFlexTagViewTests-arm64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Tests/BRFlexTagViewTests/BRTagViewTests.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/sources"]
+    outputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swift.o","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewTests.swiftmodule"]
+    description: "Compiling Swift Module 'BRFlexTagViewTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","BRFlexTagViewTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagViewTests.swiftmodule","-output-file-map","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/sources","-I","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx13.0","-enable-batch-mode","-index-store-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-color-diagnostics","-swift-version","5","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","taglistview"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Tests/BRFlexTagViewTests/","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Package.swift","/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

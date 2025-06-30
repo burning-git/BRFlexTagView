@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/master.swiftdeps"
+  },
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Tests/BRFlexTagViewTests/BRTagViewTests.swift": {
+    "dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.d",
+    "object": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swift.o",
+    "swiftmodule": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagViewTests.build/BRTagViewTests.swiftdeps"
+  }
+}

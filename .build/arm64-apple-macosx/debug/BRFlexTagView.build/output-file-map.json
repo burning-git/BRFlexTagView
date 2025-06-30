@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/master.swiftdeps"
+  },
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift": {
+    "dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.d",
+    "object": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o",
+    "swiftmodule": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView~partial.swiftmodule",
+    "swift-dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swiftdeps"
+  },
+  "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift": {
+    "dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.d",
+    "object": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o",
+    "swiftmodule": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample~partial.swiftmodule",
+    "swift-dependencies": "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swiftdeps"
+  }
+}
