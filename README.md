@@ -2,7 +2,7 @@
 
 一个灵活且强大的iOS标签视图组件，支持混合类型标签、自定义样式和自适应布局。
 
-> **🎉 新名称说明**: 从 `BRTagView` 升级为 `BRFlexTagView`，体现组件的核心特性：**灵活性 (Flexibility)** 和 **可扩展性 (Extensibility)**。同时保持完全向后兼容，现有代码无需修改！
+> **🎉 新名称说明**: BRFlexTagView，体现组件的核心特性：**灵活性 (Flexibility)** 和 **可扩展性 (Extensibility)**。同时保持完全向后兼容，现有代码无需修改！
 
 ## 特性
 
