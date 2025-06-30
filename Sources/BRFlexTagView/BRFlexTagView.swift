@@ -103,7 +103,7 @@ public class BRFlexTagView: UIView {
     }
     
     /// 行对齐方式
-    public var lineAlignment: LineAlignment = .center {
+    public var lineAlignment: LineAlignment = .left {
         didSet { setNeedsTagLayout() }
     }
     
@@ -130,6 +130,8 @@ public class BRFlexTagView: UIView {
     private var heightConstraint: NSLayoutConstraint?
     private var contentHeightConstraint: NSLayoutConstraint?
     private var needsTagLayout = false
+    private var lastLayoutBounds: CGRect = .zero
+    private var isPerformingLayout = false
     
     public override var bounds: CGRect {
         didSet {
@@ -162,7 +164,7 @@ public class BRFlexTagView: UIView {
         contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         tagHorizontalSpacing: CGFloat = 10.0,
         tagVerticalSpacing: CGFloat = 10.0,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(frame: frame)
@@ -186,7 +188,7 @@ public class BRFlexTagView: UIView {
         frame: CGRect = .zero,
         contentInset: CGFloat,
         tagSpacing: CGFloat,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(
@@ -214,7 +216,7 @@ public class BRFlexTagView: UIView {
         verticalInset: CGFloat,
         horizontalSpacing: CGFloat,
         verticalSpacing: CGFloat,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(
@@ -566,7 +568,10 @@ public class BRFlexTagView: UIView {
         case .adaptive:
             // 自适应模式：调整自身高度以适应内容
             if let heightConstraint = heightConstraint {
-                heightConstraint.constant = contentHeight
+                // 只在高度确实变化时才更新约束
+                if abs(heightConstraint.constant - contentHeight) > 0.5 {
+                    heightConstraint.constant = contentHeight
+                }
             } else {
                 let newHeightConstraint = heightAnchor.constraint(equalToConstant: contentHeight)
                 newHeightConstraint.isActive = true
@@ -575,43 +580,73 @@ public class BRFlexTagView: UIView {
             
             // 更新内容视图和滚动视图
             if let contentView = contentView, let scrollView = scrollView {
-                // 移除旧的内容高度约束
-                if let contentHeightConstraint = contentHeightConstraint {
-                    contentView.removeConstraint(contentHeightConstraint)
-                    self.contentHeightConstraint = nil
+                let safeContentHeight = max(contentHeight, 1)
+                
+                // 检查是否需要更新内容高度约束
+                let needsHeightUpdate = contentHeightConstraint?.constant != safeContentHeight
+                
+                if needsHeightUpdate {
+                    // 移除旧的内容高度约束
+                    if let contentHeightConstraint = contentHeightConstraint {
+                        contentView.removeConstraint(contentHeightConstraint)
+                        self.contentHeightConstraint = nil
+                    }
+                    
+                    // 添加新的高度约束
+                    let newContentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: safeContentHeight)
+                    newContentHeightConstraint.isActive = true
+                    self.contentHeightConstraint = newContentHeightConstraint
                 }
                 
-                // 添加新的高度约束
-                let safeContentHeight = max(contentHeight, 1)
-                let newContentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: safeContentHeight)
-                newContentHeightConstraint.isActive = true
-                self.contentHeightConstraint = newContentHeightConstraint
-                
                 // 更新滚动视图的内容大小
-                scrollView.contentSize = CGSize(width: viewWidth, height: safeContentHeight)
+                let newContentSize = CGSize(width: viewWidth, height: safeContentHeight)
+                if scrollView.contentSize != newContentSize {
+                    scrollView.contentSize = newContentSize
+                }
             }
             
         case .fixed:
             // 固定高度模式：只更新内容视图和滚动视图
             if let contentView = contentView, let scrollView = scrollView {
-                // 移除旧的内容高度约束
-                if let contentHeightConstraint = contentHeightConstraint {
-                    contentView.removeConstraint(contentHeightConstraint)
-                    self.contentHeightConstraint = nil
+                let safeContentHeight = max(contentHeight, 1)
+                
+                // 检查是否需要更新内容高度约束
+                let needsHeightUpdate = contentHeightConstraint?.constant != safeContentHeight
+                
+                if needsHeightUpdate {
+                    // 移除旧的内容高度约束
+                    if let contentHeightConstraint = contentHeightConstraint {
+                        contentView.removeConstraint(contentHeightConstraint)
+                        self.contentHeightConstraint = nil
+                    }
+                    
+                    // 添加新的高度约束
+                    let newContentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: safeContentHeight)
+                    newContentHeightConstraint.isActive = true
+                    self.contentHeightConstraint = newContentHeightConstraint
                 }
                 
-                // 添加新的高度约束，确保至少有1像素的高度
-                let safeContentHeight = max(contentHeight, 1)
-                let newContentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: safeContentHeight)
-                newContentHeightConstraint.isActive = true
-                self.contentHeightConstraint = newContentHeightConstraint
-                
                 // 更新滚动视图的内容大小
-                scrollView.contentSize = CGSize(width: viewWidth, height: safeContentHeight)
+                let newContentSize = CGSize(width: viewWidth, height: safeContentHeight)
+                if scrollView.contentSize != newContentSize {
+                    scrollView.contentSize = newContentSize
+                }
             }
         }
         
-        invalidateIntrinsicContentSize()
+        // 只在高度真的变化时调用 invalidateIntrinsicContentSize
+        let newIntrinsicHeight: CGFloat
+        switch heightMode {
+        case .adaptive:
+            newIntrinsicHeight = contentHeight
+        case .fixed(let height):
+            newIntrinsicHeight = height
+        }
+        
+        let currentIntrinsicHeight = intrinsicContentSize.height
+        if abs(newIntrinsicHeight - currentIntrinsicHeight) > 0.5 {
+            invalidateIntrinsicContentSize()
+        }
     }
     
     /// 计算行分组信息
@@ -734,9 +769,25 @@ public class BRFlexTagView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        // 会不会导致循环. 目前测试不会导致
-        performTagLayout()
-        print("#fsadadads:\(#function)")
+        
+        // 防止在布局过程中的循环调用
+        guard !isPerformingLayout else { return }
+        
+        // 检查是否需要重新布局：
+        // 1. 明确的布局请求标志
+        // 2. bounds大小发生了变化
+        let boundsChanged = bounds.size != lastLayoutBounds.size
+        let shouldLayout = needsTagLayout || boundsChanged
+        
+        if shouldLayout {
+            needsTagLayout = false
+            lastLayoutBounds = bounds
+            isPerformingLayout = true
+            
+            performTagLayout()
+            
+            isPerformingLayout = false
+        }
     }
 }
 
