@@ -28,11 +28,19 @@
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagData.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagItemView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagView.swift"
         },
         {
           "kind" : "file",
@@ -47,8 +55,10 @@
       "moduleName" : "BRFlexTagView",
       "moduleOutputPath" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules/BRFlexTagView.swiftmodule",
       "objects" : [
-        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o",
-        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o"
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagData.swift.o",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagItemView.swift.o",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagProtocols.swift.o",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagView.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -99,11 +109,19 @@
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagData.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagItemView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagView.swift.o"
         },
         {
           "kind" : "file",
@@ -112,8 +130,10 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift",
-        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift"
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagData.swift",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagItemView.swift",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagProtocols.swift",
+        "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagView.swift"
       ],
       "tempsPath" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build",
       "wholeModuleOptimization" : false
@@ -308,8 +328,10 @@
       "taglistview",
       "-incremental",
       "-c",
-      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift",
-      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift",
+      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagData.swift",
+      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagItemView.swift",
+      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagProtocols.swift",
+      "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagView.swift",
       "-I",
       "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -506,11 +528,19 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagView.swift"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagData.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRTagViewExample.swift"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagItemView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/Sources/BRFlexTagView/BRFlexTagView.swift"
         }
       ],
       "outputFilePath" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/sources"
@@ -538,11 +568,19 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagView.swift.o"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagData.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRTagViewExample.swift.o"
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagItemView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/gitburning/Desktop/Work/APE_Ieltes_ios/App/Demo/TagListView/.build/arm64-apple-macosx/debug/BRFlexTagView.build/BRFlexTagView.swift.o"
         },
         {
           "kind" : "file",

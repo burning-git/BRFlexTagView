@@ -14,18 +14,61 @@ import UIKit
  *
  * 支持混合类型的标签显示，具有自适应布局和丰富的间距配置选项。
  *
+ * 主要功能：
+ * - 混合类型标签支持：可同时显示文本、图片等不同类型的标签
+ * - 自适应布局：标签自动换行，支持固定高度和自适应高度模式
+ * - 行对齐方式：支持每行标签的左对齐、居中对齐、右对齐
+ * - 丰富的间距配置：精确控制内容内边距、标签间距、行间距
+ * - 便利构造函数：支持在初始化时直接配置所有布局参数
+ *
+ * 构造方式：
+ * ```swift
+ * // 基础构造
+ * let tagView = BRFlexTagView()
+ * 
+ * // 完整配置构造
+ * let tagView = BRFlexTagView(
+ *     contentInsets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
+ *     tagHorizontalSpacing: 8,
+ *     tagVerticalSpacing: 12,
+ *     lineAlignment: .center,
+ *     heightMode: .adaptive
+ * )
+ * 
+ * // 快速设置统一间距
+ * let tagView = BRFlexTagView(
+ *     contentInset: 16,
+ *     tagSpacing: 8,
+ *     lineAlignment: .center
+ * )
+ * ```
+ *
  * 间距配置说明：
  * - contentInsets: 使用 UIEdgeInsets 控制整个内容区域的内边距
  * - tagHorizontalSpacing: 标签之间的水平间距
  * - tagVerticalSpacing: 行与行之间的垂直间距
  * - 提供便利方法如 setContentInsets(), setTagSpacing() 等简化配置
  * - 每个标签的内部间距由标签自己处理
+ *
+ * 对齐方式配置：
+ * - lineAlignment: 控制每行标签的对齐方式
+ * - .left: 左对齐
+ * - .center: 居中对齐（推荐默认）
+ * - .right: 右对齐
+ * - 提供便利方法如 setLeftAlignment(), setCenterAlignment(), setRightAlignment()
  */
 public class BRFlexTagView: UIView {
     // 模式设置
     public enum HeightMode {
         case adaptive  // 高度自适应
         case fixed(CGFloat)  // 固定高度，需要参数指定高度
+    }
+    
+    // 行对齐方式
+    public enum LineAlignment {
+        case left     // 左对齐
+        case center   // 居中对齐  
+        case right    // 右对齐
     }
     
     // 配置参数 - 保持向后兼容
@@ -56,6 +99,11 @@ public class BRFlexTagView: UIView {
     
     /// 标签垂直间距（行与行之间的上下距离）
     public var tagVerticalSpacing: CGFloat = 10.0 {
+        didSet { setNeedsTagLayout() }
+    }
+    
+    /// 行对齐方式
+    public var lineAlignment: LineAlignment = .center {
         didSet { setNeedsTagLayout() }
     }
     
@@ -94,6 +142,84 @@ public class BRFlexTagView: UIView {
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
+    }
+    
+    /// 便利构造函数，支持直接配置布局参数
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - contentInsets: 内容区域的内边距，默认为零
+    ///   - tagHorizontalSpacing: 标签水平间距，默认10.0
+    ///   - tagVerticalSpacing: 标签垂直间距（行间距），默认10.0
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        tagHorizontalSpacing: CGFloat = 10.0,
+        tagVerticalSpacing: CGFloat = 10.0,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(frame: frame)
+        
+        // 设置配置参数
+        self.contentInsets = contentInsets
+        self.tagHorizontalSpacing = tagHorizontalSpacing
+        self.tagVerticalSpacing = tagVerticalSpacing
+        self.lineAlignment = lineAlignment
+        self.heightMode = heightMode
+    }
+    
+    /// 便利构造函数，支持快速设置统一间距
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - contentInset: 统一的内容内边距
+    ///   - tagSpacing: 统一的标签间距
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        contentInset: CGFloat,
+        tagSpacing: CGFloat,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(
+            frame: frame,
+            contentInsets: UIEdgeInsets(top: contentInset, left: contentInset, bottom: contentInset, right: contentInset),
+            tagHorizontalSpacing: tagSpacing,
+            tagVerticalSpacing: tagSpacing,
+            lineAlignment: lineAlignment,
+            heightMode: heightMode
+        )
+    }
+    
+    /// 便利构造函数，支持快速设置水平垂直间距
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - horizontalInset: 水平内边距（左右）
+    ///   - verticalInset: 垂直内边距（上下）
+    ///   - horizontalSpacing: 标签水平间距
+    ///   - verticalSpacing: 标签垂直间距（行间距）
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        horizontalInset: CGFloat,
+        verticalInset: CGFloat,
+        horizontalSpacing: CGFloat,
+        verticalSpacing: CGFloat,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(
+            frame: frame,
+            contentInsets: UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset),
+            tagHorizontalSpacing: horizontalSpacing,
+            tagVerticalSpacing: verticalSpacing,
+            lineAlignment: lineAlignment,
+            heightMode: heightMode
+        )
     }
     
     // MARK: - Public API Methods
@@ -197,6 +323,56 @@ public class BRFlexTagView: UIView {
         self.contentInsets = contentInsets
         self.tagHorizontalSpacing = tagHorizontalSpacing
         self.tagVerticalSpacing = tagVerticalSpacing
+    }
+    
+    // MARK: - 对齐方式配置便利方法
+    
+    /// 设置标签行为左对齐
+    public func setLeftAlignment() {
+        lineAlignment = .left
+    }
+    
+    /// 设置标签行为居中对齐
+    public func setCenterAlignment() {
+        lineAlignment = .center
+    }
+    
+    /// 设置标签行为右对齐
+    public func setRightAlignment() {
+        lineAlignment = .right
+    }
+    
+    /// 批量配置布局设置
+    /// - Parameters:
+    ///   - alignment: 行对齐方式
+    ///   - contentInsets: 内容内边距
+    ///   - tagHorizontalSpacing: 标签水平间距
+    ///   - tagVerticalSpacing: 标签垂直间距
+    public func configureLayout(
+        alignment: LineAlignment,
+        contentInsets: UIEdgeInsets,
+        tagHorizontalSpacing: CGFloat,
+        tagVerticalSpacing: CGFloat
+    ) {
+        self.lineAlignment = alignment
+        self.contentInsets = contentInsets
+        self.tagHorizontalSpacing = tagHorizontalSpacing
+        self.tagVerticalSpacing = tagVerticalSpacing
+    }
+    
+    // MARK: - Layout Helper Structures
+    
+    /// 标签信息结构
+    private struct TagInfo {
+        let view: any UIView & BRFlexTagItemViewProtocol
+        let size: CGSize
+    }
+    
+    /// 行组结构
+    private struct LineGroup {
+        let tags: [TagInfo]
+        let totalWidth: CGFloat
+        let maxHeight: CGFloat
     }
     
     // MARK: - Private Methods
@@ -338,41 +514,43 @@ public class BRFlexTagView: UIView {
         // 计算实际可用宽度（减去内边距）
         let availableContentWidth = viewWidth - contentInsets.left - contentInsets.right
         
-        // 设置起始位置（考虑内边距）
-        var xOffset: CGFloat = contentInsets.left
-        var yOffset: CGFloat = contentInsets.top
-        var maxHeightInCurrentLine: CGFloat = 0
+        // 第一阶段：按行分组标签并计算尺寸
+        let lineGroups = calculateLineGroups(availableWidth: availableContentWidth)
         
-        for (_, tagView) in tagViews.enumerated() {
-            // 计算当前行剩余可用宽度
-            let remainingWidth = max(availableContentWidth - (xOffset - contentInsets.left), 0)
+        // 第二阶段：根据对齐方式设置标签位置
+        var yOffset: CGFloat = contentInsets.top
+        
+        for lineGroup in lineGroups {
+            // 计算当前行的对齐偏移量
+            let alignmentOffset = calculateAlignmentOffset(
+                lineGroup: lineGroup,
+                availableWidth: availableContentWidth
+            )
             
-            // 计算标签的理想尺寸（无宽度限制）
-            let idealSize = tagView.sizeThatFits(CGSize(width: availableContentWidth, height: CGFloat.greatestFiniteMagnitude))
+            // 设置当前行所有标签的位置
+            var xOffset = contentInsets.left + alignmentOffset
             
-            // 如果标签太宽，不能放在当前行剩余空间，且不是行首，换到下一行
-            if idealSize.width > remainingWidth && xOffset > contentInsets.left {
-                xOffset = contentInsets.left
-                yOffset += maxHeightInCurrentLine + tagVerticalSpacing
-                maxHeightInCurrentLine = 0
+            for tagInfo in lineGroup.tags {
+                tagInfo.view.frame = CGRect(
+                    x: xOffset,
+                    y: yOffset,
+                    width: tagInfo.size.width,
+                    height: tagInfo.size.height
+                )
+                
+                xOffset += tagInfo.size.width + tagHorizontalSpacing
             }
             
-            // 重新计算放置位置的可用宽度
-            let newRemainingWidth = max(availableContentWidth - (xOffset - contentInsets.left), 0)
-            
-            // 计算最终尺寸（如果标签宽度超过整行宽度，则使用整行宽度并换行显示）
-            let finalSize = tagView.sizeThatFits(CGSize(width: newRemainingWidth, height: CGFloat.greatestFiniteMagnitude))
-            
-            // 设置标签位置和尺寸
-            tagView.frame = CGRect(x: xOffset, y: yOffset, width: finalSize.width, height: finalSize.height)
-            
-            // 更新下一个标签的x位置（添加标签宽度和水平间距）
-            xOffset += finalSize.width + tagHorizontalSpacing
-            maxHeightInCurrentLine = max(maxHeightInCurrentLine, finalSize.height)
+            yOffset += lineGroup.maxHeight + tagVerticalSpacing
+        }
+        
+        // 移除最后一行多余的垂直间距
+        if !lineGroups.isEmpty {
+            yOffset -= tagVerticalSpacing
         }
         
         // 计算内容总高度（包括底部内边距）
-        let contentHeight = tagItems.isEmpty ? (contentInsets.top + contentInsets.bottom) : (yOffset + maxHeightInCurrentLine + contentInsets.bottom)
+        let contentHeight = tagItems.isEmpty ? (contentInsets.top + contentInsets.bottom) : (yOffset + contentInsets.bottom)
         
         // 根据模式更新约束
         switch heightMode {
@@ -427,6 +605,74 @@ public class BRFlexTagView: UIView {
         invalidateIntrinsicContentSize()
     }
     
+    /// 计算行分组信息
+    private func calculateLineGroups(availableWidth: CGFloat) -> [LineGroup] {
+        var lineGroups: [LineGroup] = []
+        var currentLineTags: [TagInfo] = []
+        var currentLineWidth: CGFloat = 0
+        var currentLineMaxHeight: CGFloat = 0
+        
+        for tagView in tagViews {
+            // 计算标签的理想尺寸
+            let idealSize = tagView.sizeThatFits(CGSize(width: availableWidth, height: CGFloat.greatestFiniteMagnitude))
+            
+            // 检查当前行是否还能容纳这个标签
+            let widthNeeded = currentLineWidth + idealSize.width + (currentLineTags.isEmpty ? 0 : tagHorizontalSpacing)
+            
+            // 如果当前行放不下且当前行不为空，需要换行
+            if widthNeeded > availableWidth && !currentLineTags.isEmpty {
+                // 保存当前行
+                let lineGroup = LineGroup(
+                    tags: currentLineTags,
+                    totalWidth: currentLineWidth,
+                    maxHeight: currentLineMaxHeight
+                )
+                lineGroups.append(lineGroup)
+                
+                // 开始新行
+                currentLineTags = []
+                currentLineWidth = 0
+                currentLineMaxHeight = 0
+            }
+            
+            // 添加标签到当前行
+            let tagInfo = TagInfo(view: tagView, size: idealSize)
+            currentLineTags.append(tagInfo)
+            
+            // 更新当前行的宽度和高度
+            if currentLineTags.count == 1 {
+                currentLineWidth = idealSize.width
+            } else {
+                currentLineWidth += tagHorizontalSpacing + idealSize.width
+            }
+            currentLineMaxHeight = max(currentLineMaxHeight, idealSize.height)
+        }
+        
+        // 添加最后一行（如果有标签）
+        if !currentLineTags.isEmpty {
+            let lineGroup = LineGroup(
+                tags: currentLineTags,
+                totalWidth: currentLineWidth,
+                maxHeight: currentLineMaxHeight
+            )
+            lineGroups.append(lineGroup)
+        }
+        
+        return lineGroups
+    }
+    
+    /// 计算对齐偏移量
+    private func calculateAlignmentOffset(lineGroup: LineGroup, availableWidth: CGFloat) -> CGFloat {
+        switch lineAlignment {
+        case .left:
+            return 0
+        case .center:
+            return max(0, (availableWidth - lineGroup.totalWidth) / 2)
+        case .right:
+            return max(0, availableWidth - lineGroup.totalWidth)
+        }
+    }
+    
     public override var intrinsicContentSize: CGSize {
         switch heightMode {
         case .adaptive:
@@ -435,13 +681,35 @@ public class BRFlexTagView: UIView {
                 return CGSize(width: UIView.noIntrinsicMetric, height: emptyHeight)
             }
             
-            var maxY: CGFloat = contentInsets.top
-            for view in tagViews {
-                maxY = max(maxY, view.frame.maxY)
-            }
+            // 使用当前的容器宽度计算高度
+            let containerView = contentView ?? self
+            var viewWidth: CGFloat = 0
             
-            // 添加底部内边距
-            let totalHeight = maxY + contentInsets.bottom
+            if let scrollView = scrollView {
+                viewWidth = scrollView.bounds.width
+            }
+            if viewWidth <= 0 {
+                viewWidth = containerView.bounds.width
+            }
+            if viewWidth <= 0 {
+                viewWidth = bounds.width
+            }
+            if viewWidth <= 0 {
+                viewWidth = UIScreen.main.bounds.width - 32 // 假设左右各16点边距
+            }
+            viewWidth = max(viewWidth, 100) // 最小宽度100点
+            
+            let availableContentWidth = viewWidth - contentInsets.left - contentInsets.right
+            let lineGroups = calculateLineGroups(availableWidth: availableContentWidth)
+            
+            // 计算总高度
+            var totalHeight = contentInsets.top + contentInsets.bottom
+            if !lineGroups.isEmpty {
+                for lineGroup in lineGroups {
+                    totalHeight += lineGroup.maxHeight + tagVerticalSpacing
+                }
+                totalHeight -= tagVerticalSpacing // 移除最后一行多余的垂直间距
+            }
             
             return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
             
