@@ -174,8 +174,8 @@ public class BRTagViewExampleViewController: UIViewController {
         textTagView.tags = ["Swift", "iOS", "UIKit", "Auto Layout"]
         textTagView.tagBackgroundColor = .systemBlue
         textTagView.tagTextColor = .white
-        textTagView.onTagTapped = { index in
-            print("Tapped text tag at index: \(index)")
+        textTagView.onTagTapped = { index, model, tagView in
+            print("Tapped text tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 示例2: 使用新协议系统 - 文本标签
@@ -186,8 +186,8 @@ public class BRTagViewExampleViewController: UIViewController {
             BRFlexTextTagData(text: "Tags")
         ]
         protocolTextTagView.setTagData(textData, viewType: BRFlexTagItemView.self)
-        protocolTextTagView.onTagTapped = { index in
-            print("Tapped protocol text tag at index: \(index)")
+        protocolTextTagView.onTagTapped = { index, model, tagView in
+            print("Tapped protocol text tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 示例3: 使用新协议系统 - 图片+文本标签
@@ -204,8 +204,8 @@ public class BRTagViewExampleViewController: UIViewController {
             BRFlexImageTextTagData(text: "Bookmarkasdadadasddsdsds", imageName: "bookmark.fill")
         ]
         imageTextTagView.setTagData(imageTextData, viewType: BRFlexImageTextTagView.self)
-        imageTextTagView.onTagTapped = { index in
-            print("Tapped image text tag at index: \(index)")
+        imageTextTagView.onTagTapped = { index, model, tagView in
+            print("Tapped image text tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 示例4: 自定义按钮标签
@@ -216,8 +216,8 @@ public class BRTagViewExampleViewController: UIViewController {
             BRFlexButtonTagData(title: "Share", style: .secondary)
         ]
         buttonTagView.setTagData(buttonData, viewType: BRFlexButtonTagView.self)
-        buttonTagView.onTagTapped = { index in
-            print("Tapped button tag at index: \(index)")
+        buttonTagView.onTagTapped = { index, model, tagView in
+            print("Tapped button tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 示例5: 🎯 新功能 - 混合类型标签
@@ -236,8 +236,8 @@ public class BRTagViewExampleViewController: UIViewController {
             items.append(AnyFlexTagItem.create(data: BRFlexTextTagData(text: "混合"), viewType: BRFlexTagItemView.self))
             items.append(AnyFlexTagItem.create(data: BRFlexTextTagData(text: "类型"), viewType: BRFlexTagItemView.self))
         }
-        mixedTagView.onTagTapped = { index in
-            print("Tapped mixed tag at index: \(index)")
+        mixedTagView.onTagTapped = { index, model, tagView in
+            print("Tapped mixed tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 示例6: 使用便利方法动态添加不同类型标签
@@ -245,8 +245,8 @@ public class BRTagViewExampleViewController: UIViewController {
         dynamicTagView.addTagData(BRFlexTextTagData(text: "动态"), viewType: BRFlexTagItemView.self)
         dynamicTagView.addTagData(BRFlexImageTextTagData(text: "添加", imageName: "plus.circle"), viewType: BRFlexImageTextTagView.self)
         dynamicTagView.addTagData(BRFlexButtonTagData(title: "删除", style: .destructive), viewType: BRFlexButtonTagView.self)
-        dynamicTagView.onTagTapped = { index in
-            print("Tapped dynamic tag at index: \(index)")
+        dynamicTagView.onTagTapped = { index, model, tagView in
+            print("Tapped dynamic tag at index: \(index), model: \(model), tagView: \(tagView)")
         }
         
         // 添加到视图并设置布局
@@ -457,8 +457,10 @@ public class BRFlexButtonTagView: UIView, BRFlexTagItemViewProtocol {
  
  6. 标签点击事件：
     ```swift
-    tagView.onTagTapped = { index in
+    tagView.onTagTapped = { index, model, tagView in
         print("Tapped tag at index: \(index)")
+        print("Tag model: \(model)")
+        print("Tag view: \(tagView)")
     }
     ```
  

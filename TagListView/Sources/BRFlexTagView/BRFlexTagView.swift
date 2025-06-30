@@ -113,7 +113,12 @@ public class BRFlexTagView: UIView {
     public var tagFont: UIFont = .systemFont(ofSize: 14)
     public var tagBackgroundColor: UIColor = .systemBlue
     public var tagTextColor: UIColor = .white
-    public var onTagTapped: ((Int) -> Void)? = nil
+    /// 标签点击回调
+    /// - Parameters:
+    ///   - index: 标签索引
+    ///   - model: 标签数据模型
+    ///   - tagView: 标签视图本身
+    public var onTagTapped: ((Int, any BRFlexTagItemDataProtocol, BRFlexTagView) -> Void)? = nil
     
     public var heightMode: HeightMode = .adaptive {
         didSet { updateHeightMode() }
@@ -735,6 +740,16 @@ public class BRFlexTagView: UIView {
 
 extension BRFlexTagView: BRFlexTagItemViewDelegate {
     public func tagItemTapped(at index: Int) {
-        onTagTapped?(index)
+        // 确保索引有效
+        guard index >= 0 && index < tagItems.count else {
+            print("Warning: Tag tapped with invalid index \(index), tagItems count: \(tagItems.count)")
+            return
+        }
+        
+        // 获取标签数据模型
+        let tagData = tagItems[index].data
+        
+        // 调用回调，传递索引、数据模型和视图本身
+        onTagTapped?(index, tagData, self)
     }
 }
