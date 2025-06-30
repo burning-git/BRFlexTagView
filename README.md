@@ -41,9 +41,6 @@ import BRFlexTagView
 
 // 推荐使用新名称
 let tagView = BRFlexTagView()
-// 或者继续使用旧名称（向后兼容）
-// let tagView = BRTagView()
-
 tagView.tags = ["Swift", "iOS", "UIKit", "Auto Layout"]
 tagView.tagBackgroundColor = .systemBlue
 tagView.tagTextColor = .white
