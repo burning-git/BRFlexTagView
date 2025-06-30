@@ -19,6 +19,29 @@ import UIKit
  * - 自适应布局：标签自动换行，支持固定高度和自适应高度模式
  * - 行对齐方式：支持每行标签的左对齐、居中对齐、右对齐
  * - 丰富的间距配置：精确控制内容内边距、标签间距、行间距
+ * - 便利构造函数：支持在初始化时直接配置所有布局参数
+ *
+ * 构造方式：
+ * ```swift
+ * // 基础构造
+ * let tagView = BRFlexTagView()
+ * 
+ * // 完整配置构造
+ * let tagView = BRFlexTagView(
+ *     contentInsets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
+ *     tagHorizontalSpacing: 8,
+ *     tagVerticalSpacing: 12,
+ *     lineAlignment: .center,
+ *     heightMode: .adaptive
+ * )
+ * 
+ * // 快速设置统一间距
+ * let tagView = BRFlexTagView(
+ *     contentInset: 16,
+ *     tagSpacing: 8,
+ *     lineAlignment: .center
+ * )
+ * ```
  *
  * 间距配置说明：
  * - contentInsets: 使用 UIEdgeInsets 控制整个内容区域的内边距
@@ -29,8 +52,8 @@ import UIKit
  *
  * 对齐方式配置：
  * - lineAlignment: 控制每行标签的对齐方式
- * - .left: 左对齐（默认）
- * - .center: 居中对齐
+ * - .left: 左对齐
+ * - .center: 居中对齐（推荐默认）
  * - .right: 右对齐
  * - 提供便利方法如 setLeftAlignment(), setCenterAlignment(), setRightAlignment()
  */
@@ -90,7 +113,12 @@ public class BRFlexTagView: UIView {
     public var tagFont: UIFont = .systemFont(ofSize: 14)
     public var tagBackgroundColor: UIColor = .systemBlue
     public var tagTextColor: UIColor = .white
-    public var onTagTapped: ((Int) -> Void)? = nil
+    /// 标签点击回调
+    /// - Parameters:
+    ///   - index: 标签索引
+    ///   - model: 标签数据模型
+    ///   - tagView: 标签视图本身
+    public var onTagTapped: ((Int, any BRFlexTagItemDataProtocol, BRFlexTagView) -> Void)? = nil
     
     public var heightMode: HeightMode = .adaptive {
         didSet { updateHeightMode() }
@@ -119,6 +147,84 @@ public class BRFlexTagView: UIView {
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
+    }
+    
+    /// 便利构造函数，支持直接配置布局参数
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - contentInsets: 内容区域的内边距，默认为零
+    ///   - tagHorizontalSpacing: 标签水平间距，默认10.0
+    ///   - tagVerticalSpacing: 标签垂直间距（行间距），默认10.0
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        tagHorizontalSpacing: CGFloat = 10.0,
+        tagVerticalSpacing: CGFloat = 10.0,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(frame: frame)
+        
+        // 设置配置参数
+        self.contentInsets = contentInsets
+        self.tagHorizontalSpacing = tagHorizontalSpacing
+        self.tagVerticalSpacing = tagVerticalSpacing
+        self.lineAlignment = lineAlignment
+        self.heightMode = heightMode
+    }
+    
+    /// 便利构造函数，支持快速设置统一间距
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - contentInset: 统一的内容内边距
+    ///   - tagSpacing: 统一的标签间距
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        contentInset: CGFloat,
+        tagSpacing: CGFloat,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(
+            frame: frame,
+            contentInsets: UIEdgeInsets(top: contentInset, left: contentInset, bottom: contentInset, right: contentInset),
+            tagHorizontalSpacing: tagSpacing,
+            tagVerticalSpacing: tagSpacing,
+            lineAlignment: lineAlignment,
+            heightMode: heightMode
+        )
+    }
+    
+    /// 便利构造函数，支持快速设置水平垂直间距
+    /// - Parameters:
+    ///   - frame: 视图框架
+    ///   - horizontalInset: 水平内边距（左右）
+    ///   - verticalInset: 垂直内边距（上下）
+    ///   - horizontalSpacing: 标签水平间距
+    ///   - verticalSpacing: 标签垂直间距（行间距）
+    ///   - lineAlignment: 行对齐方式，默认居中对齐
+    ///   - heightMode: 高度模式，默认自适应
+    public convenience init(
+        frame: CGRect = .zero,
+        horizontalInset: CGFloat,
+        verticalInset: CGFloat,
+        horizontalSpacing: CGFloat,
+        verticalSpacing: CGFloat,
+        lineAlignment: LineAlignment = .center,
+        heightMode: HeightMode = .adaptive
+    ) {
+        self.init(
+            frame: frame,
+            contentInsets: UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset),
+            tagHorizontalSpacing: horizontalSpacing,
+            tagVerticalSpacing: verticalSpacing,
+            lineAlignment: lineAlignment,
+            heightMode: heightMode
+        )
     }
     
     // MARK: - Public API Methods
@@ -171,6 +277,10 @@ public class BRFlexTagView: UIView {
     /// 获取标签数据
     public func getTagData() -> [any BRFlexTagItemDataProtocol] {
         return tagItems.map { $0.data }
+    }
+    
+    public func getTagView() -> [any UIView & BRFlexTagItemViewProtocol] {
+        return self.tagViews
     }
     
     /// 获取标签项
@@ -634,6 +744,16 @@ public class BRFlexTagView: UIView {
 
 extension BRFlexTagView: BRFlexTagItemViewDelegate {
     public func tagItemTapped(at index: Int) {
-        onTagTapped?(index)
+        // 确保索引有效
+        guard index >= 0 && index < tagItems.count else {
+            print("Warning: Tag tapped with invalid index \(index), tagItems count: \(tagItems.count)")
+            return
+        }
+        
+        // 获取标签数据模型
+        let tagData = tagItems[index].data
+        
+        // 调用回调，传递索引、数据模型和视图本身
+        onTagTapped?(index, tagData, self)
     }
 }

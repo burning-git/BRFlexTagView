@@ -103,7 +103,7 @@ public class BRFlexTagView: UIView {
     }
     
     /// 行对齐方式
-    public var lineAlignment: LineAlignment = .center {
+    public var lineAlignment: LineAlignment = .left {
         didSet { setNeedsTagLayout() }
     }
     
@@ -162,7 +162,7 @@ public class BRFlexTagView: UIView {
         contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         tagHorizontalSpacing: CGFloat = 10.0,
         tagVerticalSpacing: CGFloat = 10.0,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(frame: frame)
@@ -186,7 +186,7 @@ public class BRFlexTagView: UIView {
         frame: CGRect = .zero,
         contentInset: CGFloat,
         tagSpacing: CGFloat,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(
@@ -214,7 +214,7 @@ public class BRFlexTagView: UIView {
         verticalInset: CGFloat,
         horizontalSpacing: CGFloat,
         verticalSpacing: CGFloat,
-        lineAlignment: LineAlignment = .center,
+        lineAlignment: LineAlignment = .left,
         heightMode: HeightMode = .adaptive
     ) {
         self.init(
@@ -277,6 +277,10 @@ public class BRFlexTagView: UIView {
     /// 获取标签数据
     public func getTagData() -> [any BRFlexTagItemDataProtocol] {
         return tagItems.map { $0.data }
+    }
+    
+    public func getTagView() -> [any UIView & BRFlexTagItemViewProtocol] {
+        return self.tagViews
     }
     
     /// 获取标签项

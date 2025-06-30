@@ -11,10 +11,8 @@ All notable changes to BRFlexTagView will be documented in this file.
 - 📖 更新了所有文档和示例代码
 
 ### Package重命名详情
-- **旧名称**: `BRTagView` 
 - **新名称**: `BRFlexTagView` (更加高大上且好记！)
 - **导入方式**: `import BRFlexTagView`
-- **核心类名**: `BRTagView` (保持不变)
 
 ### 为什么重命名？
 - 🚀 **Flex** 体现了组件的核心特性：灵活性和可扩展性
@@ -22,22 +20,16 @@ All notable changes to BRFlexTagView will be documented in this file.
 - 🎨 更加现代化和专业的命名风格
 - 📱 与Swift/iOS生态系统命名惯例保持一致
 
-### 迁移指南
-如果您之前使用的是 `BRTagView`，只需要：
-
 1. 更新Package依赖URL
-2. 将 `import BRTagView` 改为 `import BRFlexTagView`
-3. 所有其他API保持完全不变！
+2. 所有其他API保持完全不变！
 
 ```swift
-// 旧的导入方式
-import BRTagView
 
 // 新的导入方式  
 import BRFlexTagView
 
 // 使用方式完全相同！
-let tagView = BRTagView()
+let tagView = BRFlexTagView()
 tagView.tags = ["Swift", "iOS", "Flexible"]
 ```
 

@@ -15,12 +15,12 @@ class ViewController: UIViewController {
         title = "TagView Demo"
         
         // 添加导航按钮来切换到 TagCollectionView 演示
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "CollectionView Demo",
-            style: .plain,
-            target: self,
-            action: #selector(showCollectionViewDemo)
-        )
+        // navigationItem.rightBarButtonItem = UIBarButtonItem(
+        //     title: "CollectionView Demo",
+        //     style: .plain,
+        //     target: self,
+        //     action: #selector(showCollectionViewDemo)
+        // )
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Custom Demo",
