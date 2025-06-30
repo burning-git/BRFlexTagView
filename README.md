@@ -28,7 +28,7 @@ https://github.com/your-username/BRFlexTagView
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-username/BRFlexTagView", from: "1.0.0")
+    .package(url: "https://github.com/your-username/BRFlexTagView", from: "0.0.1")
 ]
 ```
 
